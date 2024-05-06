@@ -1,20 +1,73 @@
-﻿// ExamOAIP_Task_3.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
+﻿/*
+Разработать функцию, которая формирует стек Stack, включив в него
+по одному разу элементы, которые входят в один из стеков Stack1 и Stack2, но
+не входят в другой.
+*/
+#include <stack>
 #include <iostream>
+using namespace std;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+int main() {
+	setlocale(0, "ru");
+	stack<int> Stack;
+	stack<int> Stack1;
+	stack<int> Stack2;
+
+	cout << "В стэке максимум 3 числа!" << endl;
+	cout << "Введите числа в 1-ый стек: " << endl;
+	int i = 0;
+	int arrStack1[3];
+	while (i < 3)
+	{
+		int Num;
+		cin >> Num;
+		Stack1.push(Num);
+		arrStack1[i] = Num;
+		i++;
+	}
+	int j = 0;
+	int arrStack2[3];
+	cout << "Введите числа во 2-ой стек: " << endl;
+	while (j < 3)
+	{
+		int Num;
+		cin >> Num;
+		Stack2.push(Num);
+		arrStack2[j] = Num;
+		j++;
+	}
+	
+	for (int i = 0; i < 3; i++) {
+		int temp = arrStack1[i];
+		int Sovpadinai = 0;
+		for (int j = 0; j < 3; j++) {
+			if (temp == arrStack2[j]) {
+				Sovpadinai++;
+			}
+		}
+		if (Sovpadinai == 0) {
+			Stack.push(temp);
+		}
+	}
+	for (int i = 0; i < 3; i++) {
+		int temp = arrStack2[i];
+		int Sovpadinai = 0;
+		for (int j = 0; j < 3; j++) {
+			if (temp == arrStack1[j]) {
+				Sovpadinai++;
+			}
+		}
+		if (Sovpadinai == 0) {
+			Stack.push(temp);
+		}
+	}
+
+	if (Stack2.size() == 0 && Stack1.size() == 0) {
+		cout << "Оба стека пустые" << endl;
+	}
+	cout << "Стек в котором будут разные числа: " << endl;
+	while (!Stack.empty()) {
+		cout << Stack.top() << endl;
+		Stack.pop();
+	}
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
